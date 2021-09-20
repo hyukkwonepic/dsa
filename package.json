@@ -1,0 +1,30 @@
+{
+  "name": "dsa",
+  "version": "1.0.0",
+  "description": "An example and the problem of data structures and algorithm samples. Written in JavaScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexKwonIsAwesome/dsa.git"
+  },
+  "author": "Alex Kwon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexKwonIsAwesome/dsa/issues"
+  },
+  "homepage": "https://github.com/alexKwonIsAwesome/dsa#readme",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "jest": "^27.2.0",
+    "prettier": "2.4.1"
+  },
+  "dependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
+    "babel-jest": "^27.2.0"
+  }
+}

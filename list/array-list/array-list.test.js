@@ -6,8 +6,8 @@ import {
   remove,
   count,
   LIST_LENGTH,
-} from './list.js';
-import { pipe } from '../util';
+} from './array-list.js';
+import { pipe } from '../../util';
 
 describe('List', () => {
   it('should initialize list', () => {

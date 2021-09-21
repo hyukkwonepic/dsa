@@ -1,11 +1,9 @@
 export const LIST_LENGTH = 100;
 
-export const init = () => {
-  return {
-    array: new Array(LIST_LENGTH),
-    numberOfData: 0,
-    currentPosition: -1,
-  };
+export const init = (list) => {
+  list.array = new Array(LIST_LENGTH);
+  list.numberOfData = 0;
+  list.currentPosition = -1;
 };
 
 export const insert = (list, data) => {
@@ -13,55 +11,36 @@ export const insert = (list, data) => {
     throw new Error('UNABLE TO INSERT');
   }
 
-  const newArray = [...list.array];
-  newArray[list.numberOfData] = data;
-
-  return {
-    ...list,
-    array: newArray,
-    numberOfData: list.numberOfData + 1,
-  };
+  list.array[list.numberOfData] = data;
+  list.numberOfData += 1;
 };
 
 export const first = (list) => {
-  return [
-    {
-      ...list,
-      array: [...list.array],
-      currentPosition: 0,
-    },
-    list.array[0],
-  ];
+  list.currentPosition = 0;
+  return list.array[list.currentPosition];
 };
 
 export const next = (list) => {
-  const newCurrentPosition = list.currentPosition + 1;
-  const data = list.array[newCurrentPosition];
+  if (!list.array[list.currentPosition + 1]) {
+    return undefined;
+  }
 
-  const newList = {
-    ...list,
-    array: [...list.array],
-    currentPosition:
-      data === undefined ? list.currentPosition : list.currentPosition + 1,
-  };
-
-  return [newList, data];
+  list.currentPosition += 1;
+  return list.array[list.currentPosition];
 };
 
 export const remove = (list) => {
-  const removePosition = list.currentPosition;
-  const newArray = [...list.array];
-  newArray[removePosition] = undefined;
+  const data = list.array[list.currentPosition];
+  list.array[list.currentPosition] = undefined;
 
-  for (let i = removePosition; i < list.numberOfData - 1; i += 1) {
-    newArray[i] = newArray[i + 1];
+  for (let i = list.currentPosition; i < list.numberOfData - 1; i += 1) {
+    list.array[i] = list.array[i + 1];
   }
 
-  return {
-    array: newArray,
-    currentPosition: list.currentPosition - 1,
-    numberOfData: list.numberOfData - 1,
-  };
+  list.currentPosition -= 1;
+  list.numberOfData -= 1;
+
+  return data;
 };
 
 export const count = (list) => {

@@ -7,7 +7,6 @@ import {
   count,
   LIST_LENGTH,
 } from './array-list.js';
-import { pipe } from '../../util';
 
 describe('ArrayList', () => {
   it('should initialize list', () => {

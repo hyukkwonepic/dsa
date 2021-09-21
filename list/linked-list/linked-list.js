@@ -1,8 +1,14 @@
-import * as linkedListNode from './linked-list-node';
+import {
+  init as linkedListNodeInit,
+  setData,
+  setNext,
+  getData,
+  getNext,
+} from './linked-list-node.js';
 
 export const init = (list) => {
   const node = {};
-  linkedListNode.init(node);
+  linkedListNodeInit(node);
   list.head = node;
   list.current = null;
   list.before = null;
@@ -12,31 +18,31 @@ export const init = (list) => {
 
 const sortInsert = (list, data) => {
   const node = {};
-  linkedListNode.init(node);
-  linkedListNode.setData(node, data);
+  linkedListNodeInit(node);
+  setData(node, data);
 
   let predictionNode = list.head;
 
   while (
-    predictionNode.next !== null &&
-    list.comparisonFunc(predictionNode.next.data, data) < 0
+    getNext(predictionNode) !== null &&
+    list.comparisonFunc(getData(getNext(predictionNode)), data) < 0
   ) {
-    predictionNode = predictionNode.next;
+    predictionNode = getNext(predictionNode);
   }
 
-  node.next = predictionNode.next;
-  predictionNode.next = node;
+  setNext(node, getNext(predictionNode));
+  setNext(predictionNode, node);
 
   list.numberOfData += 1;
 };
 
 const firstInsert = (list, data) => {
   const node = {};
-  linkedListNode.init(node);
-  linkedListNode.setData(node, data);
+  linkedListNodeInit(node);
+  setData(node, data);
 
-  node.next = list.head.next;
-  list.head.next = node;
+  setNext(node, list.head.next);
+  setNext(list.head, node);
   list.numberOfData += 1;
 };
 
@@ -49,25 +55,25 @@ export const insert = (list, data) => {
 };
 
 export const first = (list) => {
-  if (list.head.next === null) {
+  if (getNext(list.head) === null) {
     return null;
   }
 
   list.before = list.head;
-  list.current = list.head.next;
+  list.current = getNext(list.head);
 
-  return list.current.data;
+  return getData(list.current);
 };
 
 export const next = (list) => {
-  if (list.current.next === null) {
+  if (getNext(list.current) === null) {
     return null;
   }
 
   list.before = list.current;
-  list.current = list.current.next;
+  list.current = getNext(list.current);
 
-  return list.current.data;
+  return getData(list.current);
 };
 
 export const remove = (list) => {
@@ -77,10 +83,10 @@ export const remove = (list) => {
 
   const removedNode = list.current;
   list.current = list.before;
-  list.current.next = removedNode.next;
+  setNext(list.current, getNext(removedNode));
   list.numberOfData -= 1;
 
-  return removedNode.data;
+  return getData(removedNode);
 };
 
 export const count = (list) => {

@@ -7,6 +7,14 @@ export const setData = (node, data) => {
   node.data = data;
 };
 
-export const link = (node, nextNode) => {
+export const setNext = (node, nextNode) => {
   node.next = nextNode;
+};
+
+export const getData = (node) => {
+  return node.data;
+};
+
+export const getNext = (node) => {
+  return node.next;
 };
